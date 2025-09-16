@@ -1,0 +1,128 @@
+using Microsoft.EntityFrameworkCore;
+using RentalService.Data;
+using RentalService.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models; // ✅ Aggiunto per la configurazione Swagger con JWT
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Aggiungi servizi al container
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+// ✅ Configura Swagger per accettare i token JWT - Puoi lasciare questa parte per testare
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rental Service API", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
+
+
+// Configura il DbContext
+builder.Services.AddDbContext<RentalDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlServerOptionsAction => sqlServerOptionsAction.EnableRetryOnFailure()));
+
+// Aggiungi HttpClient factory
+builder.Services.AddHttpClient();
+
+// Aggiungi HttpContextAccessor per accedere al token JWT
+builder.Services.AddHttpContextAccessor();
+
+// ✅ Aggiungi IHttpClientService
+builder.Services.AddScoped<IHttpClientService, HttpClientService>();
+
+// ❌ Rimuovi la configurazione JWT Authentication
+/*
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var key = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ClockSkew = TimeSpan.Zero
+        };
+        
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("Token validated successfully");
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+builder.Services.AddAuthorization();
+*/
+
+// ✅ Configurazione CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000") // ✅ Sostituisci con l'URL del tuo frontend React
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+// ✅ Aggiungi la configurazione CORS
+app.UseCors();
+
+// ❌ Rimuovi il middleware di autenticazione e autorizzazione
+// app.UseAuthentication();
+// app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

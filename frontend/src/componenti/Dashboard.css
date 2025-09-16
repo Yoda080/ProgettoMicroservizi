@@ -1,0 +1,104 @@
+@import '../Style/variables.css';
+
+/* Stile del contenitore principale */
+.dashboard-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--color-background-light); /* ✅ Usa la variabile per lo sfondo */
+}
+
+/* Stile dell'intestazione (header) */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--color-text-dark); /* ✅ Usa la variabile */
+    background-color: var(--color-card-background); /* ✅ Usa la variabile */
+    box-shadow: 0 4px 6px var(--color-shadow-light); /* ✅ Usa la variabile */
+}
+
+/* Stile del titolo */
+.dashboard-title {
+    color: var(--color-text-dark); /* ✅ Usa la variabile */
+    margin: 0;
+}
+
+/* Stile della sezione utente */
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+/* Stile del messaggio di benvenuto */
+.welcome-message {
+    margin-right: 15px;
+    color: var(--color-text-medium); /* ✅ Usa la variabile */
+}
+
+/* Stile del bottone di logout */
+.logout-btn {
+    background-color: var(--color-logout); /* ✅ Usa la variabile */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--color-logout-hover); /* ✅ Usa la variabile */
+}
+
+/* Stile del contenitore delle sezioni */
+.dashboard-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}s
+
+/* Stile delle card (sezioni) */
+.dashboard-card {
+    background-color: var(--color-card-background); /* ✅ Usa la variabile */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ✅ Mantieni l'ombra o usa la variabile se l'hai definita */
+}
+
+.dashboard-card h3 {
+    color: var(--color-text-dark); /* ✅ Usa la variabile */
+    margin-top: 0;
+}
+
+/* Stile dei bottoni all'interno delle card */
+.card-button {
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Colore specifico per il bottone del catalogo film */
+.card-button.primary {
+    background-color: var(--color-primary-action); /* ✅ Usa la variabile */
+}
+
+.card-button.primary:hover {
+    background-color: var(--color-primary-action-hover); /* ✅ Usa la variabile */
+}
+
+/* Colore specifico per il bottone dei noleggi */
+.card-button.rentals {
+    background-color: var(--color-secondary-action); /* ✅ Usa la variabile */
+}
+
+.card-button.rentals:hover {
+    background-color: var(--color-secondary-action-hover); /* ✅ Usa la variabile */
+}
