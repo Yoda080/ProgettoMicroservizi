@@ -12,15 +12,15 @@ using RentalService.Data;
 namespace RentalService.Migrations
 {
     [DbContext(typeof(RentalDbContext))]
-    [Migration("20250915095109_AddMissingColumns")]
-    partial class AddMissingColumns
+    [Migration("20250916160754_MyNewMigration")]
+    partial class MyNewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "9.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -34,26 +34,34 @@ namespace RentalService.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("due_date");
 
                     b.Property<int>("MovieId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("movie_id");
 
                     b.Property<DateTime>("RentedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("rented_at");
 
                     b.Property<DateTime?>("ReturnedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("returned_at");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(10,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("total_price");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rentals");
+                    b.ToTable("rentals", "dbo");
                 });
 #pragma warning restore 612, 618
         }

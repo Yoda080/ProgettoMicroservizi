@@ -5458,11 +5458,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\MovieCatalogService\\MovieCatalogService.csproj",
+      "projectUniqueName": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\MovieCatalogService\\MovieCatalogService.csproj",
       "projectName": "MovieCatalogService",
-      "projectPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\MovieCatalogService\\MovieCatalogService.csproj",
+      "projectPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\MovieCatalogService\\MovieCatalogService.csproj",
       "packagesPath": "C:\\Users\\ZALTERLAND\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\MovieCatalogService\\obj\\",
+      "outputPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\MovieCatalogService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ZALTERLAND\\AppData\\Roaming\\NuGet\\NuGet.Config"

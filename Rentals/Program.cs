@@ -4,7 +4,7 @@ using RentalService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.OpenApi.Models; // ✅ Aggiunto per la configurazione Swagger con JWT
+using Microsoft.OpenApi.Models; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// ✅ Configura Swagger per accettare i token JWT - Puoi lasciare questa parte per testare
+// ✅ Configura Swagger per accettare i token JWT
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rental Service API", Version = "v1" });
@@ -40,7 +40,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
 // Configura il DbContext
 builder.Services.AddDbContext<RentalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -55,10 +54,9 @@ builder.Services.AddHttpContextAccessor();
 // ✅ Aggiungi IHttpClientService
 builder.Services.AddScoped<IHttpClientService, HttpClientService>();
 
-// ❌ Rimuovi la configurazione JWT Authentication
-/*
+// ✅ Configurazione JWT Authentication corretta
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-var key = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]);
+var key = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"] ?? string.Empty);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -91,7 +89,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
-*/
 
 // ✅ Configurazione CORS
 builder.Services.AddCors(options =>
@@ -99,9 +96,10 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000") // ✅ Sostituisci con l'URL del tuo frontend React
+            policy.WithOrigins("http://localhost:3000") 
                 .AllowAnyHeader()
-                .AllowAnyMethod();
+                .AllowAnyMethod()
+                .AllowCredentials();
         });
 });
 
@@ -119,9 +117,9 @@ app.UseHttpsRedirection();
 // ✅ Aggiungi la configurazione CORS
 app.UseCors();
 
-// ❌ Rimuovi il middleware di autenticazione e autorizzazione
-// app.UseAuthentication();
-// app.UseAuthorization();
+// ✅ Middleware di autenticazione e autorizzazione
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\Rental.csproj": {}
+    "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\Rental.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\Rental.csproj": {
+    "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\Rental.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\Rental.csproj",
+        "projectUniqueName": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\Rental.csproj",
         "projectName": "Rental",
-        "projectPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\Rental.csproj",
+        "projectPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\Rental.csproj",
         "packagesPath": "C:\\Users\\ZALTERLAND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\obj\\",
+        "outputPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ZALTERLAND\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj": {
-                "projectPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj"
+              "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj": {
+                "projectPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj"
               }
             }
           }
@@ -48,6 +48,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.7, )"
@@ -86,14 +90,14 @@
         }
       }
     },
-    "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj": {
+    "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj",
+        "projectUniqueName": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj",
         "projectName": "UserService",
-        "projectPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj",
+        "projectPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj",
         "packagesPath": "C:\\Users\\ZALTERLAND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\obj\\",
+        "outputPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ZALTERLAND\\AppData\\Roaming\\NuGet\\NuGet.Config"

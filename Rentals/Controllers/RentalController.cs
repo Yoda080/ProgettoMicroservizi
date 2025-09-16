@@ -4,14 +4,16 @@ using RentalService.Models;
 using RentalService.Services;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-// ✅ Rimosso: using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Security.Authentication;
 
 namespace RentalService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    // ✅ Rimosso: [Authorize]
+    [Authorize]
     public class RentalsController : ControllerBase
     {
         private readonly RentalDbContext _context;
@@ -23,16 +25,27 @@ namespace RentalService.Controllers
             _httpClientService = httpClientService;
         }
 
+        /// <summary>
+        /// Helper method to get the user ID from the JWT token claims.
+        /// </summary>
+        private string GetUserIdFromToken()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                throw new AuthenticationException("User ID not found in token.");
+            }
+            return userIdClaim.Value;
+        }
+
         [HttpPost]
         public async Task<IActionResult> RentMovie([FromBody] RentalRequest request)
         {
-            // ✅ Non possiamo più recuperare l'ID utente dal token,
-            // quindi useremo un ID statico a scopo di test.
-            // Questa è una logica NON sicura.
-            int userId = 1;
-
             try
             {
+                // ✅ Ottieni l'ID utente dal token come stringa
+                var userId = GetUserIdFromToken();
+
                 var movieExists = await _httpClientService.ExistsAsync("MovieService", $"api/movies/exists/{request.MovieId}");
                 if (!movieExists)
                 {
@@ -49,9 +62,10 @@ namespace RentalService.Controllers
                     moviePrice = 4.99m;
                 }
 
+                // ✅ Usa l'ID utente come stringa nel noleggio
                 var rental = new Rental
                 {
-                    UserId = userId,
+                    UserId = userId, // Ora è una stringa
                     MovieId = request.MovieId,
                     RentedAt = DateTime.UtcNow,
                     DueDate = DateTime.UtcNow.AddDays(7),
@@ -69,6 +83,10 @@ namespace RentalService.Controllers
                     totalPrice = moviePrice
                 });
             }
+            catch (AuthenticationException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
@@ -78,44 +96,52 @@ namespace RentalService.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserRentals()
         {
-            // ✅ Poiché non c'è autenticazione, non possiamo filtrare per utente.
-            // L'endpoint restituirà tutti i noleggi nel database.
-            var rentals = await _context.Rentals.ToListAsync();
-            return Ok(rentals);
+            try
+            {
+                // ✅ Filtra i noleggi in base all'ID dell'utente autenticato come stringa
+                var userId = GetUserIdFromToken();
+
+                var rentals = await _context.Rentals
+                                            .Where(r => r.UserId == userId)
+                                            .ToListAsync();
+                return Ok(rentals);
+            }
+            catch (AuthenticationException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
 
         [HttpPost("return/{id}")]
         public async Task<IActionResult> ReturnMovie(int id)
         {
-            // ✅ Non possiamo più recuperare l'ID utente per la verifica di proprietà.
-            var rental = await _context.Rentals.FindAsync(id);
-
-            if (rental == null)
+            try
             {
-                return NotFound("Rental not found.");
-            }
+                // ✅ Verifica che l'utente stia cercando di restituire un proprio film
+                var userId = GetUserIdFromToken();
 
-            if (rental.ReturnedAt != null)
+                var rental = await _context.Rentals
+                                           .FirstOrDefaultAsync(r => r.Id == id && r.UserId == userId);
+
+                if (rental == null)
+                {
+                    return NotFound("Rental not found or does not belong to the current user.");
+                }
+
+                if (rental.ReturnedAt != null)
+                {
+                    return BadRequest("Movie has already been returned.");
+                }
+
+                rental.ReturnedAt = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+                return Ok("Movie returned successfully.");
+            }
+            catch (AuthenticationException ex)
             {
-                return BadRequest("Movie has already been returned.");
+                return Unauthorized(ex.Message);
             }
-
-            rental.ReturnedAt = DateTime.UtcNow;
-            await _context.SaveChangesAsync();
-            return Ok("Movie returned successfully.");
         }
-
-        // ✅ L'endpoint per admin non ha più senso senza autenticazione e ruoli.
-        // L'ho commentato per evitare problemi.
-        /*
-        [HttpGet("all")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetAllRentals()
-        {
-            var rentals = await _context.Rentals.ToListAsync();
-            return Ok(rentals);
-        }
-        */
     }
 
     public class RentalRequest

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XFTGfpSQCyk=",
+  "dgSpecHash": "RBkHzUOmRks=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\Rental.csproj",
+  "projectFilePath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\Rental.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ZALTERLAND\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\ZALTERLAND\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

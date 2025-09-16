@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 namespace RentalService.Models
 {
-    [Table("rentals_db")] 
+    [Table("rentals_db", Schema = "dbo")]
     public class Rental
     {
         public int Id { get; set; }
 
         [Column("user_id")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Column("movie_id")]
         public int MovieId { get; set; }

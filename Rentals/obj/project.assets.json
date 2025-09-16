@@ -6142,6 +6142,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.9",
       "Microsoft.AspNetCore.OpenApi >= 9.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.9",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.9",
@@ -6154,11 +6155,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\Rental.csproj",
+      "projectUniqueName": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\Rental.csproj",
       "projectName": "Rental",
-      "projectPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\Rental.csproj",
+      "projectPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\Rental.csproj",
       "packagesPath": "C:\\Users\\ZALTERLAND\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\Rentals\\obj\\",
+      "outputPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\Rentals\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ZALTERLAND\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -6173,8 +6174,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj": {
-              "projectPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj"
+            "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj": {
+              "projectPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj"
             }
           }
         }
@@ -6195,6 +6196,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[9.0.9, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[9.0.7, )"

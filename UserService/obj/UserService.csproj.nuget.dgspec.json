@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj": {}
+    "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj": {
+    "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj",
+        "projectUniqueName": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj",
         "projectName": "UserService",
-        "projectPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\UserService.csproj",
+        "projectPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\UserService.csproj",
         "packagesPath": "C:\\Users\\ZALTERLAND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZALTERLAND\\Downloads\\ProgettoFinale-main\\UserService\\obj\\",
+        "outputPath": "C:\\Users\\ZALTERLAND\\Desktop\\ProgettoFinale2\\UserService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ZALTERLAND\\AppData\\Roaming\\NuGet\\NuGet.Config"
